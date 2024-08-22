@@ -1,5 +1,5 @@
 
-const GenderCheckbox = ({ onCheckboxChange, selectedGender }) => {
+const GenderCheckbox = (props) => {
 	return (
 		<div className='flex'>
 			<div className='form-control'>
@@ -8,8 +8,8 @@ const GenderCheckbox = ({ onCheckboxChange, selectedGender }) => {
 					<input 
 						type='checkbox' 
 						className='checkbox border-slate-900' 
-						checked={selectedGender === "male"}
-						onChange={() => onCheckboxChange("male")}
+						checked={props.selectedGender === "male"}
+						onChange={() => props.onCheckboxChange("male")}
 					/>
 				</label>
 			</div>
@@ -19,8 +19,8 @@ const GenderCheckbox = ({ onCheckboxChange, selectedGender }) => {
 					<input 
 						type='checkbox' 
 						className='checkbox border-slate-900' 
-						checked={selectedGender === "female"}
-						onChange={() => onCheckboxChange("female")}
+						checked={props.selectedGender === "female"}
+						onChange={() => props.onCheckboxChange("female")}
 					/>
 				</label>
 			</div>
