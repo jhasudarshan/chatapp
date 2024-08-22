@@ -17,7 +17,7 @@ const useSignup = () => {
         setLoading(true);
         
         try {
-            const res = await fetch(`${BACKEND_URL}/chat-app/auth/signin`, {
+            const res = await fetch(`${BACKEND_URL}/chat-app/auth/signup`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ fullname, username, password, confirmPassword, gender }),
