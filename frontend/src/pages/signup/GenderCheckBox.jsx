@@ -8,8 +8,8 @@ const GenderCheckbox = ({ onCheckboxChange, selectedGender }) => {
 					<input 
 						type='checkbox' 
 						className='checkbox border-slate-900' 
-						checked={props.selectedGender === "male"}
-						onChange={() => props.onCheckboxChange("male")}
+						checked={selectedGender === "male"}
+						onChange={() => onCheckboxChange("male")}
 					/>
 				</label>
 			</div>
@@ -19,8 +19,8 @@ const GenderCheckbox = ({ onCheckboxChange, selectedGender }) => {
 					<input 
 						type='checkbox' 
 						className='checkbox border-slate-900' 
-						checked={props.selectedGender === "female"}
-						onChange={() => props.onCheckboxChange("female")}
+						checked={selectedGender === "female"}
+						onChange={() => onCheckboxChange("female")}
 					/>
 				</label>
 			</div>
