@@ -9,7 +9,7 @@ const useGetConnectChats = () => {
         const getChats = async () => {
             setLoading(true);
             try {
-                const res = await fetch("/api/users/users-to-connect");
+                const res = await fetch(`${BACKEND_URL}/users/users-to-connect`);
                 const data = await res.json();
                 if (data.error) {
                     throw new Error(data.error);

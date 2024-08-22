@@ -1,6 +1,7 @@
 import express from 'express';
 import http from "http";
 import dotenv from 'dotenv';
+import cors from 'cors';
 import path from 'path';
 import authRoutes from './routes/auth.routes.js';
 import messageRoutes from './routes/message.routes.js';
@@ -11,6 +12,7 @@ import { connectSocket } from './socketIO/socket.js';
 
 const app = express();
 const server = http.createServer(app);
+app.use(cors());
 
 const __dirname = path.resolve();
 

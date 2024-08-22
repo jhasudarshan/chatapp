@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuthContext } from '../context/AuthContext';
-
+import toast from "react-hot-toast";
 
 const useSignout =  () => {
     const [ loading, setLoading ] = useState(false);
@@ -9,7 +9,7 @@ const useSignout =  () => {
     const signout = async () => {
         setLoading(true);
         try {
-            const res = await fetch("/api/chat-app/auth/signout",{
+            const res = await fetch(`${BACKEND_URL}/chat-app/auth/signout`,{
                 method: "POST",
                 headers: { "Content-Type": "application/json" }
             });

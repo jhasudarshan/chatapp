@@ -9,7 +9,7 @@ const useSendMessage = () => {
 	const sendMessage = async (message) => {
 		setLoading(true);
 		try {
-			const res = await fetch(`/api/message/send/${selectedChat._id}`, {
+			const res = await fetch(`${BACKEND_URL}/message/send/${selectedChat._id}`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

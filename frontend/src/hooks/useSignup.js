@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
+import BACKEND_URL from "../constants";
 
 
 const useSignup = () => {
@@ -16,7 +17,7 @@ const useSignup = () => {
         setLoading(true);
         
         try {
-            const res = await fetch('/api/chat-app/auth/signup', {
+            const res = await fetch(`${BACKEND_URL}/chat-app/auth/signin`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ fullname, username, password, confirmPassword, gender }),
