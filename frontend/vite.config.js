@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: "https://chatapp-fhes.onrender.com",
+        target: 'https://chatapp-fhes.onrender.com',
         ws: true,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
