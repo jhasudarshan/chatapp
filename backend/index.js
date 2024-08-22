@@ -1,6 +1,5 @@
 import express from 'express';
 import http from "http";
-import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.routes.js';
 import messageRoutes from './routes/message.routes.js';
@@ -15,10 +14,6 @@ const server = http.createServer(app);
 dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-    origin : process.env.FRONTEND_URL,
-    credentials : true
-}))
 
 const PORT = process.env.PORT || 8000;
 
