@@ -9,7 +9,7 @@ const useSignout =  () => {
     const signout = async () => {
         setLoading(true);
         try {
-            const res = await fetch("/api/chat-app/signout",{
+            const res = await fetch("/api/chat-app/auth/signout",{
                 method: "POST",
                 headers: { "Content-Type": "application/json" }
             });

@@ -5,9 +5,10 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
+    port: 5000,
     proxy: {
       '/api': {
-        target: 'https://chatapp-fhes.onrender.com',
+        target: 'http://localhost:8000',
         ws: true,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
