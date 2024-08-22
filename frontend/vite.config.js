@@ -7,12 +7,9 @@ export default defineConfig({
   server: {
     port: 5000,
     proxy: {
-      '/api': {
-        target: 'https://chatapp-fhes.onrender.com',
-        ws: true,
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
+      "/api": {
+				target: "http://localhost:8000",
+			},
+    }
   },
 })
