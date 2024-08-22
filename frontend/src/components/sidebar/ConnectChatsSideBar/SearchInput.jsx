@@ -1,13 +1,24 @@
-import { useState } from "react";
-import { IoSearchSharp } from "react-icons/io5";
-import { useChat } from "../../zustand/useChat";
-import { useGetSearchChats } from "../../hooks/useGetSearchChats";
+import { useEffect, useState } from "react";
+import { IoSearchSharp, IoArrowBack } from "react-icons/io5";
+import { useChat } from "../../../zustand/useChat";
+import { useGetConnectChats } from "../../../hooks/useGetConnectChats";
 import toast from "react-hot-toast";
+import useComponent from "../../../zustand/useComponent";
 
 const SearchInput = () => {
 	const [search, setSearch] = useState("");
 	const { setSelectedChat } = useChat();
-	const  { searchChats } = useGetSearchChats();
+	const  { searchChats } = useGetConnectChats();
+	const { component, setComponent } = useComponent();
+	
+	useEffect(() => {
+
+	},[])
+
+	const handleChatComponent = () => {
+		setComponent(component === 'UserChats' ? 'ConnectOtherUsers' : 'UserChats');
+		console.log("Button clicked")
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -27,10 +38,14 @@ const SearchInput = () => {
 	}
 	
 	return (
-		<form onSubmit={handleSubmit} className='flex items-center gap-2'>
+		<div className="flex gap-2">
+			<button className='btn btn-circle bg-sky-500 text-white' onClick={handleChatComponent} >
+				<IoArrowBack  className='w-6 h-6 outline-none'  />
+			</button>
+			<form onSubmit={handleSubmit} className='flex items-center gap-2'>
 			<input 
 				type='text' 
-				placeholder='Search…' 
+				placeholder='Search to Connect User...' 
 				className='input input-bordered rounded-full' 
 				value={search}
 				onChange={(e) => {setSearch(e.target.value)}}
@@ -39,6 +54,8 @@ const SearchInput = () => {
 				<IoSearchSharp className='w-6 h-6 outline-none' />
 			</button>
 		</form>
+		</div>
+		
 	);
 };
 export default SearchInput;

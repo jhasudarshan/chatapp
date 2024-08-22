@@ -2,7 +2,7 @@ import { useGetChats } from "../../hooks/useGetChats";
 import { getRandomEmoji } from "../../utils/randomEmoji";
 import Chat from "./Chat";
 
-const SearchChats = () => {
+const UserChats = () => {
 	const { loading, chats } = useGetChats();
 	return (
 		<div className='py-2 flex flex-col overflow-auto'>
@@ -22,4 +22,4 @@ const SearchChats = () => {
 	);
 };
 
-export default Chats;
+export default UserChats

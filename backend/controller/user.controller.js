@@ -6,7 +6,10 @@ const chatUsers = async ( req, res ) => {
         if(!user){
             return res.status(400).json({error: "Username does not exist"})
         }
-        await user.populate("friends");
+        await user.populate({
+            path: "friends",
+            select: "_id fullname username profilePic gender"
+        });
         const connectedUsers = user.friends;
         res.status(200).json(connectedUsers);
     } catch (error) {
@@ -24,11 +27,13 @@ const usersToConnect = async (req, res) => {
 
         const excludeUserIds = user.friends.concat(user._id);
 
-        const connecctUsers = await User.aggregate([
-            { $match: { _id: { $nin: excludeUserIds } } }, 
-            { $sample: { size: Math.floor(Math.random()*100) } }
-        ]).select("-password");
-        res.status(201).json(connecctUsers)
+        const connectUsers = await User.aggregate([
+            { $match: { _id: { $nin: excludeUserIds } } },
+            {$project: {
+                fullname: 1,username: 1,_id: 1,profilePic: 1,gender: 1
+            }}
+        ]);
+        res.status(201).json(connectUsers);
     } catch (error) {
         console.error("Error in usersToConnect Controller: ", error.message);
 		res.status(500).json({ error: "Internal server error" });

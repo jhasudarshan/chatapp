@@ -1,4 +1,4 @@
-import { useChat } from "../../zustand/useChat";
+import { useChat } from "../../../zustand/useChat";
 
 
 const Chat = ({chat, lastIdx, emoji}) => {

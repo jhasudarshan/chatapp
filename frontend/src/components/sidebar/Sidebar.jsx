@@ -1,16 +1,21 @@
-import SearchInput from "./SearchInput";
-import Chats from "./Chats";
-import SignOutButton from "./SignoutButton";
+import UserSidebar from "./userChatSideBar/UserSidebar";
+import ConnectUserSidebar from "./ConnectChatsSideBar/ConnectUserSidebar";
+import useComponent from "../../zustand/useComponent";
 
 const Sidebar = () => {
-	return (
-		<div className='border-r border-slate-500 p-4 flex flex-col'>
-			<SearchInput />
-			<div className='divider px-3'></div>
-			<Chats />
-			<SignOutButton />
-		</div>
-	);
+const { component } = useComponent();
+  
+  if(!component){
+    return <div>
+		<span className='loading loading-spinner mx-auto'></span>
+	</div>
+  }
+  return (<div>
+    {component === 'UserChats' ? 
+		<UserSidebar/> : 
+		<ConnectUserSidebar/>}
+  </div>
+  )
 };
 
 export default Sidebar;
