@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useAuthContext } from '../context/AuthContext';
 import toast from "react-hot-toast";
+import BACKEND_URL from "../constants";
+import axios from "axios";
 
 const useSignout =  () => {
     const [ loading, setLoading ] = useState(false);
@@ -9,12 +11,12 @@ const useSignout =  () => {
     const signout = async () => {
         setLoading(true);
         try {
-            const res = await fetch(`${BACKEND_URL}/chat-app/auth/signout`,{
-                method: "POST",
+            const res = await axios.post(`${BACKEND_URL}/chat-app/auth/signout`, {}, {
                 headers: { "Content-Type": "application/json" }
             });
             
-            const data = await res.json();
+            //const data = await res.json();
+            const data = await res.data;
             if(data.error) {
                 throw new Error(data.error);
             }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
-import toast from "react-hot-toast";
+import axios from "axios";
 import BACKEND_URL from "../constants";
 
 
@@ -15,19 +15,27 @@ const useSignup = () => {
             return;
         }
         setLoading(true);
-        
         try {
-            const res = await fetch(`${BACKEND_URL}/chat-app/auth/signup`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ fullname, username, password, confirmPassword, gender }),
+            console.log("working");
+            const res = await axios.post(`${BACKEND_URL}/chat-app/auth//signup`, {
+                fullname,
+                username,
+                password,
+                confirmPassword,
+                gender
+            }, {
+                headers: { "Content-Type": "application/json" }
             });
 
-            const data = await res.json();
+            const data = await res.data; // Ensure you get the correct data
 
-            if(data.error) {
+            // Assuming res.data contains a 'token' and other user data
+            console.log("API Response:", data);
+
+            if (data.error) {
                 throw new Error(data.error);
             }
+
             localStorage.setItem("chat-user", JSON.stringify(data));
             setAuthUser(data);
         } catch (error) {
@@ -41,19 +49,18 @@ const useSignup = () => {
 }
 
 function handleInputErrors({ fullname, username, password, confirmPassword, gender }) {
-    console.log({ fullname, username, password, confirmPassword, gender });
     if (!fullname || !username || !password || !confirmPassword || !gender) {
-		toast.error("Please fill in all fields");
+		alert("all fields are required");
 		return false;
 	}
 
 	if (password !== confirmPassword) {
-		toast.error("Passwords do not match");
+		alert("Passwords do not match");
 		return false;
 	}
 
 	if (password.length < 6) {
-		toast.error("Password must be at least 8 characters");
+		alert("Password must be at least 8 characters");
 		return false;
 	}
 

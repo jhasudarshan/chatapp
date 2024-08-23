@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useChat } from "../zustand/useChat";
 import toast from "react-hot-toast";
+import axios from "axios";
+import BACKEND_URL from "../constants";
 
 const useGetMessages = () => {
 	const [loading, setLoading] = useState(false);
@@ -10,11 +12,10 @@ const useGetMessages = () => {
 		const getMessages = async () => {
 			setLoading(true);
 			try {
-				console.log(selectedChat._id);
-				const res = await fetch(`${BACKEND_URL}/message/${selectedChat._id}`,{
-					method: 'GET',
-				});
-				const data = await res.json();
+				const res = await axios.get(`${BACKEND_URL}/message/${selectedChat._id}`);
+			
+				
+				const data = await res.data;
 				if (data.error) throw new Error(data.error);
 				setMessages(data);
 			} catch (error) {

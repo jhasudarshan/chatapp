@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react"
 import toast from "react-hot-toast";
+import axios from "axios";
+import BACKEND_URL from "../constants";
 
 const useGetConnectChats = () => {
     const [ loading, setLoading ] = useState(false);
@@ -9,8 +11,9 @@ const useGetConnectChats = () => {
         const getChats = async () => {
             setLoading(true);
             try {
-                const res = await fetch(`${BACKEND_URL}/users/users-to-connect`);
-                const data = await res.json();
+                const res = await axios.get(`${BACKEND_URL}/users/users-to-connect`);
+
+                const data = await res.data;
                 if (data.error) {
                     throw new Error(data.error);
                 }

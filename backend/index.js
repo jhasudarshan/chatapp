@@ -13,7 +13,6 @@ import { connectSocket } from './socketIO/socket.js';
 const app = express();
 const server = http.createServer(app);
 app.use(cors());
-
 const __dirname = path.resolve();
 
 dotenv.config();

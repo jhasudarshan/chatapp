@@ -6,12 +6,12 @@ const generateAccessTokenAndSetCookie = async (userId, res) => {
 	});
 
 	await res.cookie("chatapp-token", token, {
-		maxAge: 10 * 24 * 60 * 60 * 1000, // MS
-		httpOnly: true, //prevent XSS (Cross-Site Scripting) attacks by ensuring the cookie can't be stolen or manipulated via client-side scripts.
-		sameSite: "strict", // cookie will only be sent in requests originating from the same site as the server, helping to prevent CSRF (Cross-Site Request Forgery) attacks.
-		secure: process.env.WORK_ENV !== "development",
+		maxAge: 10 * 24 * 60 * 60 * 1000,
+    	httpOnly: true,
+    	sameSite: "strict",
+    	secure: process.env.NODE_ENV === "production",
 	});
-	console.log(`cookie set successfully`);
+	console.log('cookies set successfully');
 };
 
 export default generateAccessTokenAndSetCookie;

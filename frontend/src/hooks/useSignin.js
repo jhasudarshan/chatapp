@@ -1,6 +1,8 @@
 import toast from "react-hot-toast";
+import axios from "axios";
 import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
+import BACKEND_URL from "../constants";
 
 const useSignin =  () => {
     const [ loading, setLoading ] = useState(false);
@@ -12,21 +14,26 @@ const useSignin =  () => {
             return;
         }
         setLoading(true);
-
+        console.log("working");
         try {
-            const res = await fetch(`${BACKEND_URL}/chat-app/auth/signin`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({  username, password })
+            const res = await axios.post(`${BACKEND_URL}/chat-app/auth/signin`, {
+                username,
+                password
+            }, {
+                headers: { "Content-Type": "application/json" }
             });
 
-            const data = await res.json();
+            const data = await res.data; // Ensure you get the correct data
 
-            if(data.error) {
+            // Assuming res.data contains a 'token' and other user data
+            console.log("API Response:", data);
+
+            if (data.error) {
                 throw new Error(data.error);
             }
+
             localStorage.setItem("chat-user", JSON.stringify(data));
-            setAuthUser(data);
+            await setAuthUser(data);
         } catch (error) {
             toast.error(error.message);
         } finally {
@@ -39,7 +46,8 @@ const useSignin =  () => {
 
 function handleInputErrors({ username, password }) {
     if( !username && !password){
-        toast.error("All fields are required")
+        alert('all field are required');
+        return false;
     }
 
 	return true;

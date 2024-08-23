@@ -57,7 +57,7 @@ const signin = async (req, res) => {
         if( !user ){
             return res.status(400).json({error: "Username does not exist"})
         }
-        const isPasswordCorrect = await bcrypt.compare(password, user.password);
+        const isPasswordCorrect = bcrypt.compare(password, user.password);
         if( !isPasswordCorrect ){
             return res.status(400).json({error: "Password is Incorrect"});
         }
