@@ -10,21 +10,16 @@ const SearchInput = () => {
 	const { setSelectedChat } = useChat();
 	const  { searchChats } = useGetConnectChats();
 	const { component, setComponent } = useComponent();
-	
-	useEffect(() => {
-
-	},[])
 
 	const handleChatComponent = () => {
 		setComponent(component === 'UserChats' ? 'ConnectOtherUsers' : 'UserChats');
-		console.log("Button clicked")
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if(!search) return;
 		if(search.length < 3){
-			return toast.error("Search term must be at least 3 characters long");
+			return alert("Search term must be at least 3 characters long");
 		}
 
 		const searchChat = searchChats.find((c) => c.fullname.toLowerCase().includes(search.toLocaleLowerCase()));
@@ -33,7 +28,7 @@ const SearchInput = () => {
 			setSelectedChat(searchChat);
 			setSearch("");
 		}else{
-			toast.error("No such user Exist!");
+			alert("No such user Exist!");
 		}
 	}
 	

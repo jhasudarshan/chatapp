@@ -1,4 +1,5 @@
 import { useChat } from "../../../zustand/useChat";
+import { useSocketContext } from "../../../context/SocketContext";
 
 
 const Chat = ({chat, lastIdx, emoji}) => {
@@ -6,6 +7,8 @@ const Chat = ({chat, lastIdx, emoji}) => {
 	const { selectedChat, setSelectedChat } = useChat();
 
 	const isSelected = selectedChat?._id === chat._id;
+	const { onlineUsers } = useSocketContext();
+	const isOnline = onlineUsers.includes(chat._id);
 
 	return (
 		<>
@@ -14,7 +17,7 @@ const Chat = ({chat, lastIdx, emoji}) => {
 			`}
 				onClick={() => setSelectedChat(chat)}
 			>
-				<div className='avatar online'>
+				<div className={`avatar ${isOnline ? "online" : ""}`}>
 					<div className='w-12 rounded-full'>
 						<img src={chat.profilePic} alt='user avatar'/>
 					</div>
@@ -22,7 +25,7 @@ const Chat = ({chat, lastIdx, emoji}) => {
 
 				<div className='flex flex-col flex-1'>
 					<div className='flex gap-3 justify-between'>
-						<p className='font-bold text-gray-200'>{chat.fullname}</p>
+						<p className='font-bold text-gray-200'>{chat.username}</p>
 						<span className='text-xl'>{emoji}</span>
 					</div>
 				</div>

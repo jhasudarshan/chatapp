@@ -18,10 +18,12 @@ const UserSidebar = () => {
     </div>
   }
 	return (
-		<div className='border-r border-slate-500 p-4 flex flex-col'>
+		<div className='border-r border-slate-500 p-4 flex flex-col '>
 			<SearchInput />
 			<div className='divider px'></div>
-			<Chats />
+			<div className="overflow-y-scroll">
+				<Chats />
+			</div>
 			<div className="flex flex-col space-y-3">
   				<GrAdd className="w-8 h-6 text-white cursor-pointer" onClick={handleChatComponent} />
   				<SignOutButton />

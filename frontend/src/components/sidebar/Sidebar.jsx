@@ -10,11 +10,11 @@ const { component } = useComponent();
 		<span className='loading loading-spinner mx-auto'></span>
 	</div>
   }
-  return (<div>
+  return (<>
     {component === 'UserChats' ? 
 		<UserSidebar/> : 
 		<ConnectUserSidebar/>}
-  </div>
+  </>
   )
 };
 

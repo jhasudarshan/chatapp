@@ -5,7 +5,7 @@ import Chat from "./Chat";
 const UserChats = () => {
 	const { loading, chats } = useGetChats();
 	return (
-		<div className='py-2 flex flex-col overflow-auto'>
+		<div className='py-2 flex flex-col overflow-y-scroll'>
 			{chats.map((chat, idx) => {
 				return (
 					<Chat
