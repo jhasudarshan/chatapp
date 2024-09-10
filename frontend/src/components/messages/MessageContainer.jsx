@@ -15,22 +15,32 @@ const MessageContainer = () => {
 	}, [setSelectedChat]);
 
 	return (
-		<div className='md:min-w-[450px] flex flex-col'>
-			{!selectedChat ? (
-				<NoChatSelected authUser={authUser}/>
-			) : (
-				<>
-					{/* Header */}
-					<div className='bg-slate-500 px-4 py-2 mb-2'>
-					<span className='label-text'>From:</span>{" "}
-					<span className='text-gray-900 font-bold'>{authUser.fullname}</span>
-						<span className='label-text'>To:</span>{" "}
-						<span className='text-gray-900 font-bold'>{selectedChat.fullname}</span>
-					</div>
-					<Messages />
-					<MessageInput />
-				</>
-			)}
+		<div className='md:min-w-[450px] flex flex-col h-full'>
+		{!selectedChat ? (
+			<NoChatSelected authUser={authUser} />
+		) : (
+			<>
+			{/* Header */}
+			<div className='bg-slate-500 px-4 py-2 mb-2 flex flex-col sm:flex-row sm:items-center sm:justify-between'>
+				<div className='flex flex-col sm:flex-row sm:items-center'>
+				<span className='label-text text-xs sm:text-sm md:text-base'>From:</span>{" "}
+				<span className='text-gray-900 font-bold text-xs sm:text-sm md:text-base'>{authUser.fullname}</span>
+				</div>
+				<div className='flex flex-col sm:flex-row sm:items-center mt-2 sm:mt-0'>
+				<span className='label-text text-xs sm:text-sm md:text-base'>To:</span>{" "}
+				<span className='text-gray-900 font-bold text-xs sm:text-sm md:text-base'>{selectedChat.fullname}</span>
+				</div>
+			</div>
+			{/* Messages */}
+			<div className='flex-1 overflow-y-auto p-4'>
+				<Messages />
+			</div>
+			{/* Message Input */}
+			<div className='p-4'>
+				<MessageInput />
+			</div>
+			</>
+		)}
 		</div>
 	);
 };
